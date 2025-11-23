@@ -94,42 +94,66 @@ const CertificateGenerator = ({ pathId, userId, onClose }) => {
     URL.revokeObjectURL(url);
   };
 
-  if (completionPercentage < 100) {
-    return null;
-  }
+  return (
+    <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="bg-slate-800 rounded-xl p-6 max-w-md w-full" onClick={(e) => e.stopPropagation()}>
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-xl font-bold text-white">Generate Certificate</h3>
+          <button onClick={onClose} className="text-gray-400 hover:text-white">
+            <X size={24} />
+          </button>
+        </div>
 
-  if (certificate) {
-    return (
-      <div className="certificate-section">
-        <div className="certificate-success">
-          <Award size={48} className="certificate-icon" />
-          <h3>Certificate Generated!</h3>
-          <p>Congratulations on completing {pathName}</p>
-          <div className="certificate-actions">
-            <Button onClick={downloadCertificate} className="certificate-button">
-              <Download size={18} className="mr-2" />
-              Download Certificate
+        {!certificate ? (
+          <div>
+            <div className="text-center mb-6">
+              <Award size={64} className="text-amber-500 mx-auto mb-4" />
+              <p className="text-gray-400">
+                Congratulations on completing this path! Generate your certificate to celebrate your achievement.
+              </p>
+            </div>
+            <Button 
+              onClick={generateCertificate} 
+              disabled={generating}
+              className="w-full bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-600 hover:to-orange-700"
+            >
+              {generating ? 'Generating...' : (
+                <>
+                  <Award size={18} className="mr-2" />
+                  Generate Certificate
+                </>
+              )}
             </Button>
           </div>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="certificate-section">
-      <Button 
-        onClick={generateCertificate} 
-        disabled={generating}
-        className="certificate-generate-button"
-      >
-        {generating ? 'Generating...' : (
-          <>
-            <Award size={18} className="mr-2" />
-            Generate Certificate
-          </>
+        ) : (
+          <div>
+            <div className="text-center mb-6">
+              <div className="text-6xl mb-4">🎉</div>
+              <h4 className="text-xl font-bold text-white mb-2">Certificate Generated!</h4>
+              <p className="text-gray-400 mb-4">{certificate.path_name}</p>
+            </div>
+            
+            <div className="space-y-3">
+              <Button 
+                onClick={downloadCertificate} 
+                className="w-full bg-amber-600 hover:bg-amber-700"
+              >
+                <Download size={18} className="mr-2" />
+                Download Certificate
+              </Button>
+              
+              <Button 
+                onClick={() => window.open(`/certificate/${certificate.certificate_id}`, '_blank')} 
+                variant="outline"
+                className="w-full"
+              >
+                <ExternalLink size={18} className="mr-2" />
+                View Certificate
+              </Button>
+            </div>
+          </div>
         )}
-      </Button>
+      </div>
     </div>
   );
 };
