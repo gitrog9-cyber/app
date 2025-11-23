@@ -345,7 +345,7 @@ const Home = () => {
                   className="close-panel"
                   onClick={() => setSelectedMilestone(null)}
                 >
-                  <X size={24} />
+                  <LucideIcons.X size={24} />
                 </button>
 
                 <div className="panel-header">
