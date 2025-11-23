@@ -315,7 +315,7 @@ const Home = () => {
                       >
                         <div className="node-checkpoint">
                           {isCompleted ? (
-                            <Check size={20} className="check-icon" />
+                            <LucideIcons.Check size={20} className="check-icon" />
                           ) : (
                             <span className="node-number">{index + 1}</span>
                           )}
