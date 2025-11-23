@@ -172,7 +172,7 @@ const Home = () => {
               onClick={() => setShowWelcome(false)}
             >
               Explore Career Paths
-              <ChevronRight className="ml-2" size={20} />
+              <LucideIcons.ChevronRight className="ml-2" size={20} />
             </Button>
           </div>
         </div>
