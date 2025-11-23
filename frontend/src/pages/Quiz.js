@@ -76,7 +76,7 @@ const Quiz = () => {
   };
 
   const handleComplete = () => {
-    navigate('/');
+    navigate('/dashboard');
   };
 
   if (loading) {
